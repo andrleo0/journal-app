@@ -1,14 +1,11 @@
-import { singInWithGoogle } from "../../firebase/providers";
+import { registerUserWithEmailPassword, singInWithGoogle } from "../../firebase/providers";
 import { checkingCredencials, login, logout } from "./"
 
 
 export const checkingAuthenticaction = ( email , password ) => {
     return async ( dispatch ) => {
-        
         dispatch( checkingCredencials() );
-
     }
-
 }
 
 export const startGoogleSingIn = () => {
@@ -19,10 +16,25 @@ export const startGoogleSingIn = () => {
         const result =  await singInWithGoogle();
         if(!result.ok) return dispatch( logout( result.errorMessage ) );
 
-        dispatch( login( result ) )
-
-
-
+        dispatch( login( result ) );
     }
 
 }
+
+export const startCreatingUserWithEMailPassword = ({ email , password , displayName }) => { 
+    return async ( dispatch ) => {
+        
+        dispatch( checkingCredencials() );
+
+        const { ok , uid , photoURL , errorMessage } = await registerUserWithEmailPassword({ 
+            email, 
+            password, 
+            displayName 
+        });
+
+        if(!ok) return dispatch( logout({ errorMessage }) );
+
+        dispatch( login({ uid , displayName , email , photoURL }) );
+
+    }
+}  
