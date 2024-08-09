@@ -1,17 +1,15 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
 import { Alert, Button, Grid, Link, TextField, Typography } from "@mui/material"
 import { AuthLayout } from '../layout/AuthLayout'
 import { useForm } from '../../hooks'
-import { startCreatingUserWithEMailPassword } from '../../store/auth'
-
-
+import { clearErrorMessages, startCreatingUserWithEMailPassword } from '../../store/auth'
 
 const formData = {
-    email: '',
-    password: '',
-    displayName: ''
+  email: '',
+  password: '',
+  displayName: ''
 }
 
 const formValidations = {
@@ -24,9 +22,13 @@ export const RegisterPage = () => {
 
   const dispatch = useDispatch();
   const [formSubmitted, setFormSubmitted] = useState(false);
+  
+  useEffect(() => {
+    dispatch( clearErrorMessages() );
+  }, []);
 
   const { status , errorMessage } = useSelector( state => state.auth );
-  const isCheckingAthentication = useMemo(()=>status === 'checking',[status]) 
+  const isCheckingAthentication = useMemo(()=> status === 'checking',[status]) 
 
   const { 
     formState , displayName , email , password , onInputChange ,  
