@@ -22,10 +22,6 @@ export const RegisterPage = () => {
 
   const dispatch = useDispatch();
   const [formSubmitted, setFormSubmitted] = useState(false);
-  
-  useEffect(() => {
-    dispatch( clearErrorMessages() );
-  }, []);
 
   const { status , errorMessage } = useSelector( state => state.auth );
   const isCheckingAthentication = useMemo(()=> status === 'checking',[status]) 
@@ -42,6 +38,10 @@ export const RegisterPage = () => {
 
     if( !isFormValid ) return;
     dispatch( startCreatingUserWithEMailPassword(formState) );
+  }
+
+  const onDeletingErrorMessages = () => {
+    dispatch( clearErrorMessages() );
   }
 
   return (
@@ -114,7 +114,7 @@ export const RegisterPage = () => {
           </Grid>
           <Grid container direction="row" justifyContent="end">
             <Typography sx={{ mr: 1 }}>¿Ya tienes cuenta?</Typography>
-            <Link component={ RouterLink } color="inherit" to="/auth/login">
+            <Link onClick={ onDeletingErrorMessages } component={ RouterLink } color="inherit" to="/auth/login">
               Ingresar
             </Link>
           </Grid>

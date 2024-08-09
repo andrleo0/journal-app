@@ -25,10 +25,6 @@ export const LoginPage = () => {
   const dispatch = useDispatch();
   const [formSubmitted, setFormSubmitted] = useState(false);
   
-  useEffect(() => {
-    dispatch( clearErrorMessages() );
-  }, []);
-  
   const { status , errorMessage } = useSelector( state => state.auth );
   const isAuthenticated = useMemo( () => status === 'checking', [status]);
 
@@ -43,6 +39,10 @@ export const LoginPage = () => {
 
     if( !isFormValid ) return;
     dispatch( starLogingWithEmailPassword( formState ) );
+  }
+
+  const onDeletingErrorMessages = () => {
+    dispatch( clearErrorMessages() );
   }
 
   const onGoogleSingIn = () => {
@@ -118,7 +118,7 @@ export const LoginPage = () => {
             </Grid>
 
             <Grid container direction="row" justifyContent="end">
-              <Link component={ RouterLink } color="inherit" to="/auth/register">
+              <Link onClick={ onDeletingErrorMessages } component={ RouterLink } color="inherit" to="/auth/register">
                 Crear una cuenta
               </Link>
             </Grid>
