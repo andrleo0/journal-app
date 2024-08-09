@@ -1,7 +1,6 @@
 import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, updateProfile } from "firebase/auth";
 import { FirebaseAuth } from "./config";
 
-
 const googleProvider = new GoogleAuthProvider();
 
 export const singInWithGoogle = async() => {
@@ -9,7 +8,6 @@ export const singInWithGoogle = async() => {
         
         const result = await signInWithPopup( FirebaseAuth , googleProvider );
         // const credencials = GoogleAuthProvider.credentialFromResult( result );
-
         const { displayName , email , photoURL , uid } = result.user;
         
         return{
@@ -70,4 +68,8 @@ export const logingWithEmailPassword = async({ email , password }) => {
         return { ok: false , errorMessage: error.message }
         
     }
+}
+
+export const logoutFirebase = async() => {
+    return await FirebaseAuth.signOut();
 }

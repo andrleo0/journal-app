@@ -2,10 +2,18 @@ import { SaveOutlined } from '@mui/icons-material'
 import { Button, Grid, TextField, Typography } from '@mui/material'
 import { ImageGallery } from '../components'
 
+//AUTHZERO 
+//CLIKOUT
 
 export const NoteView = () => {
   return (
-    <Grid container direction="row" justifyContent="space-between" alignItems='canter' sx={{ mb: 1 }}>
+    <Grid
+        className="animate__animated animate__fadeIn animate__faster" 
+        container 
+        direction="row" 
+        justifyContent="space-between" 
+        alignItems='canter' sx={{ mb: 1 }}
+    >
         <Grid item>
             <Typography fontSize={ 39 } fontWeight="ligth" >28 de agosto, 2023</Typography>
         </Grid>

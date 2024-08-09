@@ -1,4 +1,4 @@
-import { logingWithEmailPassword, registerUserWithEmailPassword, singInWithGoogle } from "../../firebase/providers";
+import { logingWithEmailPassword, logoutFirebase, registerUserWithEmailPassword, singInWithGoogle } from "../../firebase/providers";
 import { checkingCredencials, login, logout } from "./"
 
 
@@ -52,5 +52,13 @@ export const starLogingWithEmailPassword = ({ email , password }) => {
         if(!result.ok) return dispatch( logout( result ) );
 
         dispatch( login(result) );
+    }
+}
+
+export const startLogout = () => {
+    return async ( dispatch ) => {
+        await logoutFirebase();
+
+        dispatch( logout() );
     }
 }
