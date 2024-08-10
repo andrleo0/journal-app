@@ -11,11 +11,15 @@ export const useCheckAuth = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-      onAuthStateChanged( FirebaseAuth , async(user)=>{
+
+      const unsubscribe = onAuthStateChanged( FirebaseAuth , async(user)=>{
         if(!user) return dispatch( logout() ) 
         const { uid , email , displayName , photoURL } = user;
         dispatch( login({ uid, email, displayName, photoURL }) )
       });
+      return () => {
+        unsubscribe();
+    };
     }, []);
 
     return status
