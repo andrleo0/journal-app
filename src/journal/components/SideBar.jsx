@@ -7,6 +7,7 @@ import { Box, Divider, Drawer, Grid, List, ListItem, ListItemButton, ListItemIco
 export const SideBar = ({ drawerWidth }) => {
     
     const { displayName } = useSelector( state => state.auth );
+    const { notes } = useSelector( state => state.journal );
 
     return (
         <Box
@@ -29,15 +30,15 @@ export const SideBar = ({ drawerWidth }) => {
                 <Divider />
                 <List>
                     {
-                        ['Enero', 'Febrero', 'Marzo', 'Abril'].map( text => (
-                            <ListItem key={ text } disablePadding>
+                        notes.map( note => (
+                            <ListItem key={ note.id } disablePadding>
                                 <ListItemButton>
                                     <ListItemIcon>
                                         <TurnedInNot/>
                                     </ListItemIcon>
                                     <Grid>
-                                        <ListItemText primary={ text } />
-                                        <ListItemText secondary="5 notas" />
+                                        <ListItemText primary={ note.title } />
+                                        <ListItemText secondary="nota" />
                                     </Grid>
                                 </ListItemButton>
                             </ListItem>

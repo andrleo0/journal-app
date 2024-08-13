@@ -22,4 +22,4 @@ export const FirebaseAuth = getAuth( FirebaseApp );
 
 //CloudBase-FireStore o RealTimeDataBase
 
-export const Firestore = getFirestore( FirebaseApp );
+export const FiresbaseDB = getFirestore( FirebaseApp );
