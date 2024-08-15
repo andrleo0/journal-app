@@ -8,6 +8,7 @@ import { setActiveNote } from "../../store/journal";
 export const SideBarItem = ({ title , body , id , date , imageUrls = [] }) => {
     
     const newTitle = useMemo(() => {
+        if( title === '' ) return 'Sin título';
         return title.length > 17 
         ? title.substring(0, 20) + '...'
         : title;
